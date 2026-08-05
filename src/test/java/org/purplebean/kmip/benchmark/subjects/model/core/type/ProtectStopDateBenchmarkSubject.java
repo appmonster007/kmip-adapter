@@ -5,8 +5,14 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ProtectStopDate;
 
+/**
+ * Benchmark subject for {@link ProtectStopDate}.
+ */
 public class ProtectStopDateBenchmarkSubject extends KmipBenchmarkSubject<ProtectStopDate> {
 
+  /**
+   * Constructs a new {@link ProtectStopDateBenchmarkSubject}.
+   */
   public ProtectStopDateBenchmarkSubject() throws Exception {
     ProtectStopDate protectStopDate = ProtectStopDate
         .builder()

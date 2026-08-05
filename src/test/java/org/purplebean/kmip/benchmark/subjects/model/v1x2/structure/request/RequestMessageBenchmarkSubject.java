@@ -14,11 +14,17 @@ import org.purplebean.kmip.model.v1x2.structure.request.RequestHeader;
 import org.purplebean.kmip.model.v1x2.structure.request.RequestMessage;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link RequestMessage}.
+ */
 public class RequestMessageBenchmarkSubject extends KmipBenchmarkSubject<RequestMessage> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link RequestMessageBenchmarkSubject}.
+   */
   public RequestMessageBenchmarkSubject() throws Exception {
     KmipContext.setSpec(getSpec());
     RequestHeader header = RequestHeader

@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.TransparentRsaPublicKey;
 import org.purplebean.kmip.model.core.type.Modulus;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * Benchmark subject for {@link TransparentRsaPublicKey}.
+ */
 public class TransparentRsaPublicKeyBenchmarkSubject
     extends KmipBenchmarkSubject<TransparentRsaPublicKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link TransparentRsaPublicKeyBenchmarkSubject}.
+   */
   public TransparentRsaPublicKeyBenchmarkSubject() throws Exception {
     TransparentRsaPublicKey transparentRsaPublicKey = TransparentRsaPublicKey.of(
         Modulus.of(BigInteger.valueOf(1)),

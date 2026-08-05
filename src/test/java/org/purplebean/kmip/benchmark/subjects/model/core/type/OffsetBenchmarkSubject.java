@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.Offset;
 
+/**
+ * Benchmark subject for {@link Offset}.
+ */
 public class OffsetBenchmarkSubject extends KmipBenchmarkSubject<Offset> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link OffsetBenchmarkSubject}.
+   */
   public OffsetBenchmarkSubject() throws Exception {
     Offset offset = Offset
         .builder()

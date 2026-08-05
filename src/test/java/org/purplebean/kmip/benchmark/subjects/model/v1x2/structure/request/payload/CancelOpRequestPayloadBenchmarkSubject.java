@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CancelOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link CancelOpRequestPayload}.
+ */
 public class CancelOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CancelOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CancelOpRequestPayloadBenchmarkSubject}.
+   */
   public CancelOpRequestPayloadBenchmarkSubject() throws Exception {
     CancelOpRequestPayload subject = CancelOpRequestPayload
         .builder()

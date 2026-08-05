@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.enumeration.State;
 import org.purplebean.kmip.model.core.structure.KeyMaterialStructure;
 import org.purplebean.kmip.model.core.type.ActivationDate;
 
+/**
+ * Benchmark subject for {@link KeyMaterialStructure}.
+ */
 public class KeyMaterialStructureBenchmarkSubject
     extends KmipBenchmarkSubject<KeyMaterialStructure> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link KeyMaterialStructureBenchmarkSubject}.
+   */
   public KeyMaterialStructureBenchmarkSubject() throws Exception {
     var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
     ActivationDate activationDate = ActivationDate

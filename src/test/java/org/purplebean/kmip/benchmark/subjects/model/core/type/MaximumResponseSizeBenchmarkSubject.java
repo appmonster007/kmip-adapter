@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.MaximumResponseSize;
 
+/**
+ * Benchmark subject for {@link MaximumResponseSize}.
+ */
 public class MaximumResponseSizeBenchmarkSubject extends KmipBenchmarkSubject<MaximumResponseSize> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link MaximumResponseSizeBenchmarkSubject}.
+   */
   public MaximumResponseSizeBenchmarkSubject() throws Exception {
     MaximumResponseSize maximumResponseSize = MaximumResponseSize
         .builder()

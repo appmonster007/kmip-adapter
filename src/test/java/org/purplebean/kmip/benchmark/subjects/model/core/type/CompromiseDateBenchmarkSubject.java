@@ -5,8 +5,14 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.CompromiseDate;
 
+/**
+ * Benchmark subject for {@link CompromiseDate}.
+ */
 public class CompromiseDateBenchmarkSubject extends KmipBenchmarkSubject<CompromiseDate> {
 
+  /**
+   * Constructs a new {@link CompromiseDateBenchmarkSubject}.
+   */
   public CompromiseDateBenchmarkSubject() throws Exception {
     CompromiseDate compromiseDate = CompromiseDate
         .builder()

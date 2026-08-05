@@ -6,12 +6,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.AuthenticatedEncryptionAdditionalData;
 
+/**
+ * Benchmark subject for {@link AuthenticatedEncryptionAdditionalData}.
+ */
 public class AuthenticatedEncryptionAdditionalDataBenchmarkSubject
     extends KmipBenchmarkSubject<AuthenticatedEncryptionAdditionalData> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link AuthenticatedEncryptionAdditionalDataBenchmarkSubject}.
+   */
   public AuthenticatedEncryptionAdditionalDataBenchmarkSubject() throws Exception {
     AuthenticatedEncryptionAdditionalData subject =
         AuthenticatedEncryptionAdditionalData.of(ByteBuffer.wrap(new byte[] {0x01, 0x02, 0x03}));

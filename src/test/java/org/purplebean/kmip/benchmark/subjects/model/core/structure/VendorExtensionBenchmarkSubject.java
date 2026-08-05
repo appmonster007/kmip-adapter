@@ -8,11 +8,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.TtlvDataType;
 import org.purplebean.kmip.model.core.structure.VendorExtension;
 
+/**
+ * Benchmark subject for {@link VendorExtension}.
+ */
 public class VendorExtensionBenchmarkSubject extends KmipBenchmarkSubject<VendorExtension> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link VendorExtensionBenchmarkSubject}.
+   */
   public VendorExtensionBenchmarkSubject() throws Exception {
     VendorExtension subject = VendorExtension
         .builder()

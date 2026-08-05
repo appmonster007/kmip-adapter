@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.ValidityDate;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ValidateOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link ValidateOpRequestPayload}.
+ */
 public class ValidateOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ValidateOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ValidateOpRequestPayloadBenchmarkSubject}.
+   */
   public ValidateOpRequestPayloadBenchmarkSubject() throws Exception {
     ValidateOpRequestPayload subject = ValidateOpRequestPayload
         .builder()

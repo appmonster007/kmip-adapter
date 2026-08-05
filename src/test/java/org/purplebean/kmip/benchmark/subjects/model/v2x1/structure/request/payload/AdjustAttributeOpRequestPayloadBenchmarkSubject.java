@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.v2x1.structure.AttributeReference;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.AdjustAttributeOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.AdjustmentValue;
 
+/**
+ * Benchmark subject for {@link AdjustAttributeOpRequestPayload}.
+ */
 public class AdjustAttributeOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<AdjustAttributeOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link AdjustAttributeOpRequestPayloadBenchmarkSubject}.
+   */
   public AdjustAttributeOpRequestPayloadBenchmarkSubject() throws Exception {
     AdjustAttributeOpRequestPayload subject = AdjustAttributeOpRequestPayload
         .builder()

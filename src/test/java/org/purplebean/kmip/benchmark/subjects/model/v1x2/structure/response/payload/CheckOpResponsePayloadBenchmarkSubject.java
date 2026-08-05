@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CheckOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link CheckOpResponsePayload}.
+ */
 public class CheckOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CheckOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CheckOpResponsePayloadBenchmarkSubject}.
+   */
   public CheckOpResponsePayloadBenchmarkSubject() throws Exception {
     CheckOpResponsePayload subject = CheckOpResponsePayload
         .builder()

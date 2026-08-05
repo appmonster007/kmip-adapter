@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.enumeration.ItemType;
 
+/**
+ * Benchmark subject for {@link ItemType}.
+ */
 public class ItemTypeBenchmarkSubject extends KmipBenchmarkSubject<ItemType> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link ItemTypeBenchmarkSubject}.
+   */
   public ItemTypeBenchmarkSubject() throws Exception {
     ItemType subject = ItemType.Standard.STRUCTURE.inst();
     initialize(subject, ItemType.class);

@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.QueryAsynchronousRequestsOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link QueryAsynchronousRequestsOpResponsePayload}.
+ */
 public class QueryAsynchronousRequestsOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<QueryAsynchronousRequestsOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link QueryAsynchronousRequestsOpResponsePayloadBenchmarkSubject}.
+   */
   public QueryAsynchronousRequestsOpResponsePayloadBenchmarkSubject() throws Exception {
     QueryAsynchronousRequestsOpResponsePayload subject = QueryAsynchronousRequestsOpResponsePayload
         .builder()

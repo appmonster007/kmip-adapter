@@ -11,12 +11,18 @@ import org.purplebean.kmip.model.core.structure.SymmetricKey;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.RegisterOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link RegisterOpRequestPayload}.
+ */
 public class RegisterOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RegisterOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link RegisterOpRequestPayloadBenchmarkSubject}.
+   */
   public RegisterOpRequestPayloadBenchmarkSubject() throws Exception {
     RegisterOpRequestPayload subject = RegisterOpRequestPayload
         .builder()

@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.MacVerifyOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link MacVerifyOpResponsePayload}.
+ */
 public class MacVerifyOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<MacVerifyOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link MacVerifyOpResponsePayloadBenchmarkSubject}.
+   */
   public MacVerifyOpResponsePayloadBenchmarkSubject() throws Exception {
     MacVerifyOpResponsePayload subject = MacVerifyOpResponsePayload
         .builder()

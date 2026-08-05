@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.enumeration.CredentialType;
 import org.purplebean.kmip.model.v3x0.structure.CredentialInformation;
 
+/**
+ * Benchmark subject for {@link CredentialInformation}.
+ */
 public class CredentialInformationBenchmarkSubject
     extends KmipBenchmarkSubject<CredentialInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link CredentialInformationBenchmarkSubject}.
+   */
   public CredentialInformationBenchmarkSubject() throws Exception {
     CredentialInformation subject = CredentialInformation
         .builder()

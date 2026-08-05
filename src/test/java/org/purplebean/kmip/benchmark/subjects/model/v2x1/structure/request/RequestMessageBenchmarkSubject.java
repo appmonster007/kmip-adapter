@@ -9,11 +9,17 @@ import org.purplebean.kmip.model.core.type.BatchCount;
 import org.purplebean.kmip.model.v2x1.structure.request.RequestHeader;
 import org.purplebean.kmip.model.v2x1.structure.request.RequestMessage;
 
+/**
+ * Benchmark subject for {@link RequestMessage}.
+ */
 public class RequestMessageBenchmarkSubject extends KmipBenchmarkSubject<RequestMessage> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link RequestMessageBenchmarkSubject}.
+   */
   public RequestMessageBenchmarkSubject() throws Exception {
     KmipContext.setSpec(getSpec());
     RequestMessage subject = RequestMessage

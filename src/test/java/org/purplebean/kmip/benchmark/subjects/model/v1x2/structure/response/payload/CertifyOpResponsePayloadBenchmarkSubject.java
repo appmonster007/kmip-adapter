@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.CertifyOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link CertifyOpResponsePayload}.
+ */
 public class CertifyOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CertifyOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CertifyOpResponsePayloadBenchmarkSubject}.
+   */
   public CertifyOpResponsePayloadBenchmarkSubject() throws Exception {
     CertifyOpResponsePayload subject = CertifyOpResponsePayload
         .builder()

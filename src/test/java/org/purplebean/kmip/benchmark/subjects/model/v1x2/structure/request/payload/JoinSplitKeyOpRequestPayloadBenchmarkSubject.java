@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.JoinSplitKeyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link JoinSplitKeyOpRequestPayload}.
+ */
 public class JoinSplitKeyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<JoinSplitKeyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link JoinSplitKeyOpRequestPayloadBenchmarkSubject}.
+   */
   public JoinSplitKeyOpRequestPayloadBenchmarkSubject() throws Exception {
     JoinSplitKeyOpRequestPayload subject = JoinSplitKeyOpRequestPayload
         .builder()

@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.v2x1.structure.Ticket;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.LoginOpResponsePayload;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * Benchmark subject for {@link LoginOpResponsePayload}.
+ */
 public class LoginOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<LoginOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link LoginOpResponsePayloadBenchmarkSubject}.
+   */
   public LoginOpResponsePayloadBenchmarkSubject() throws Exception {
     LoginOpResponsePayload subject = LoginOpResponsePayload
         .builder()

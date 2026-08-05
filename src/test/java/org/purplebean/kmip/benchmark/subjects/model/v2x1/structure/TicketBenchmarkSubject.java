@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.v2x1.enumeration.TicketType;
 import org.purplebean.kmip.model.v2x1.structure.Ticket;
 import org.purplebean.kmip.model.v2x1.type.TicketValue;
 
+/**
+ * Benchmark subject for {@link Ticket}.
+ */
 public class TicketBenchmarkSubject extends KmipBenchmarkSubject<Ticket> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link TicketBenchmarkSubject}.
+   */
   public TicketBenchmarkSubject() throws Exception {
     Ticket subject = Ticket
         .builder()

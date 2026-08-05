@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.BatchCount;
 
+/**
+ * Benchmark subject for {@link BatchCount}.
+ */
 public class BatchCountBenchmarkSubject extends KmipBenchmarkSubject<BatchCount> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link BatchCountBenchmarkSubject}.
+   */
   public BatchCountBenchmarkSubject() throws Exception {
     BatchCount batchCount = BatchCount
         .builder()

@@ -6,11 +6,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.PublicExponent;
 
+/**
+ * Benchmark subject for {@link PublicExponent}.
+ */
 public class PublicExponentBenchmarkSubject extends KmipBenchmarkSubject<PublicExponent> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link PublicExponentBenchmarkSubject}.
+   */
   public PublicExponentBenchmarkSubject() throws Exception {
     PublicExponent publicExponent = PublicExponent
         .builder()

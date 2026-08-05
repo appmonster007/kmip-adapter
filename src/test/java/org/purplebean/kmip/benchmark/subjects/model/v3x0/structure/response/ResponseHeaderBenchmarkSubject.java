@@ -9,11 +9,17 @@ import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 import org.purplebean.kmip.model.v3x0.structure.response.ResponseHeader;
 
+/**
+ * Benchmark subject for {@link ResponseHeader}.
+ */
 public class ResponseHeaderBenchmarkSubject extends KmipBenchmarkSubject<ResponseHeader> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link ResponseHeaderBenchmarkSubject}.
+   */
   public ResponseHeaderBenchmarkSubject() throws Exception {
     ResponseHeader subject = ResponseHeader
         .builder()

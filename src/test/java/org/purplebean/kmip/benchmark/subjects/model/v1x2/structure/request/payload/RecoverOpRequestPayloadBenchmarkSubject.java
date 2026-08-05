@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.RecoverOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link RecoverOpRequestPayload}.
+ */
 public class RecoverOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RecoverOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link RecoverOpRequestPayloadBenchmarkSubject}.
+   */
   public RecoverOpRequestPayloadBenchmarkSubject() throws Exception {
     RecoverOpRequestPayload subject = RecoverOpRequestPayload
         .builder()

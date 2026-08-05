@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.InteropIdentifier;
 
+/**
+ * Benchmark subject for {@link InteropIdentifier}.
+ */
 public class InteropIdentifierBenchmarkSubject extends KmipBenchmarkSubject<InteropIdentifier> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link InteropIdentifierBenchmarkSubject}.
+   */
   public InteropIdentifierBenchmarkSubject() throws Exception {
     InteropIdentifier subject =
         InteropIdentifier.of("default-string");  // TODO: Create a default instance

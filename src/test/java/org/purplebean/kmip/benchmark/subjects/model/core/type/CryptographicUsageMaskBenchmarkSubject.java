@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.CryptographicUsageMask;
 
+/**
+ * Benchmark subject for {@link CryptographicUsageMask}.
+ */
 public class CryptographicUsageMaskBenchmarkSubject
     extends KmipBenchmarkSubject<CryptographicUsageMask> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CryptographicUsageMaskBenchmarkSubject}.
+   */
   public CryptographicUsageMaskBenchmarkSubject() throws Exception {
     var fixed = 10;
     CryptographicUsageMask cryptographicUsageMask = CryptographicUsageMask

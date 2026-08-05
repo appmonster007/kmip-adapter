@@ -6,8 +6,14 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.structure.Digest;
 import org.purplebean.kmip.model.core.type.DigestValue;
 
+/**
+ * Benchmark subject for {@link Digest}.
+ */
 public class DigestBenchmarkSubject extends KmipBenchmarkSubject<Digest> {
 
+  /**
+   * Constructs a new {@link DigestBenchmarkSubject}.
+   */
   public DigestBenchmarkSubject() throws Exception {
     Digest digest = Digest
         .builder()

@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.DiscoverVersionsOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link DiscoverVersionsOpRequestPayload}.
+ */
 public class DiscoverVersionsOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DiscoverVersionsOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link DiscoverVersionsOpRequestPayloadBenchmarkSubject}.
+   */
   public DiscoverVersionsOpRequestPayloadBenchmarkSubject() throws Exception {
     DiscoverVersionsOpRequestPayload subject = DiscoverVersionsOpRequestPayload
         .builder()

@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.PutOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link PutOpResponsePayload}.
+ */
 public class PutOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<PutOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link PutOpResponsePayloadBenchmarkSubject}.
+   */
   public PutOpResponsePayloadBenchmarkSubject() throws Exception {
     PutOpResponsePayload subject = PutOpResponsePayload
         .builder()

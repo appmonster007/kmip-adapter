@@ -3,8 +3,14 @@ package org.purplebean.kmip.benchmark.subjects.model.core.type;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.CryptographicLength;
 
+/**
+ * Benchmark subject for {@link CryptographicLength}.
+ */
 public class CryptographicLengthBenchmarkSubject extends KmipBenchmarkSubject<CryptographicLength> {
 
+  /**
+   * Constructs a new {@link CryptographicLengthBenchmarkSubject}.
+   */
   public CryptographicLengthBenchmarkSubject() throws Exception {
     CryptographicLength cryptographicLength = CryptographicLength.of(256);
     initialize(cryptographicLength, CryptographicLength.class);

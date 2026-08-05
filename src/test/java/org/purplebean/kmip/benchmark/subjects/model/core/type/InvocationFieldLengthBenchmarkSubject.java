@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.InvocationFieldLength;
 
+/**
+ * Benchmark subject for {@link InvocationFieldLength}.
+ */
 public class InvocationFieldLengthBenchmarkSubject
     extends KmipBenchmarkSubject<InvocationFieldLength> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link InvocationFieldLengthBenchmarkSubject}.
+   */
   public InvocationFieldLengthBenchmarkSubject() throws Exception {
     InvocationFieldLength invocationFieldLength = InvocationFieldLength.of(128);
     initialize(invocationFieldLength, InvocationFieldLength.class);

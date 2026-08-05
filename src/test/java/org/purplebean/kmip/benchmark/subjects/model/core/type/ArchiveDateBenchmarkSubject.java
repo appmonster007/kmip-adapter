@@ -7,11 +7,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ArchiveDate;
 
+/**
+ * Benchmark subject for {@link ArchiveDate}.
+ */
 public class ArchiveDateBenchmarkSubject extends KmipBenchmarkSubject<ArchiveDate> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ArchiveDateBenchmarkSubject}.
+   */
   public ArchiveDateBenchmarkSubject() throws Exception {
     var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
     ArchiveDate archiveDate = ArchiveDate

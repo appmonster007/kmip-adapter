@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.CommonTemplateAttribute;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 
+/**
+ * Benchmark subject for {@link CommonTemplateAttribute}.
+ */
 public class CommonTemplateAttributeBenchmarkSubject
     extends KmipBenchmarkSubject<CommonTemplateAttribute> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CommonTemplateAttributeBenchmarkSubject}.
+   */
   public CommonTemplateAttributeBenchmarkSubject() throws Exception {
     CommonTemplateAttribute subject = CommonTemplateAttribute
         .builder()

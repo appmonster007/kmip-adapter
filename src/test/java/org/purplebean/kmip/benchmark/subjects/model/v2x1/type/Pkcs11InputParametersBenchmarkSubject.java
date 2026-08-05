@@ -6,12 +6,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.Pkcs11InputParameters;
 
+/**
+ * Benchmark subject for {@link Pkcs11InputParameters}.
+ */
 public class Pkcs11InputParametersBenchmarkSubject
     extends KmipBenchmarkSubject<Pkcs11InputParameters> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link Pkcs11InputParametersBenchmarkSubject}.
+   */
   public Pkcs11InputParametersBenchmarkSubject() throws Exception {
     Pkcs11InputParameters subject =
         Pkcs11InputParameters.of(ByteBuffer.wrap(new byte[] {0x01, 0x02, 0x03}));

@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.PrivateKeyUniqueIdentifier;
 import org.purplebean.kmip.model.core.type.PublicKeyUniqueIdentifier;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.CreateKeyPairOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link CreateKeyPairOpResponsePayload}.
+ */
 public class CreateKeyPairOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CreateKeyPairOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link CreateKeyPairOpResponsePayloadBenchmarkSubject}.
+   */
   public CreateKeyPairOpResponsePayloadBenchmarkSubject() throws Exception {
     CreateKeyPairOpResponsePayload subject = CreateKeyPairOpResponsePayload
         .builder()

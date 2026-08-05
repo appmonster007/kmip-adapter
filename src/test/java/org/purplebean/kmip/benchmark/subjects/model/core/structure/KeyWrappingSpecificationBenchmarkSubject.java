@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
 import org.purplebean.kmip.model.core.structure.KeyWrappingSpecification;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * Benchmark subject for {@link KeyWrappingSpecification}.
+ */
 public class KeyWrappingSpecificationBenchmarkSubject
     extends KmipBenchmarkSubject<KeyWrappingSpecification> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link KeyWrappingSpecificationBenchmarkSubject}.
+   */
   public KeyWrappingSpecificationBenchmarkSubject() throws Exception {
     KeyWrappingSpecification subject = KeyWrappingSpecification
         .builder()

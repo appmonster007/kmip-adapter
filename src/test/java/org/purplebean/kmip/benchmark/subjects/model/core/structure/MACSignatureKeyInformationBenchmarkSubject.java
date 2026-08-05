@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.structure.MACSignatureKeyInformation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * Benchmark subject for {@link MACSignatureKeyInformation}.
+ */
 public class MACSignatureKeyInformationBenchmarkSubject
     extends KmipBenchmarkSubject<MACSignatureKeyInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link MACSignatureKeyInformationBenchmarkSubject}.
+   */
   public MACSignatureKeyInformationBenchmarkSubject() throws Exception {
     MACSignatureKeyInformation subject = MACSignatureKeyInformation.of(
         UniqueIdentifier.of("fb44abe3-9721-43e0-a7d1-2568afe77d27"),

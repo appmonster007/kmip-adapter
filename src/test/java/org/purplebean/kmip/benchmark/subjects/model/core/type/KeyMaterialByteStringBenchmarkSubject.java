@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.KeyMaterialByteString;
 
+/**
+ * Benchmark subject for {@link KeyMaterialByteString}.
+ */
 public class KeyMaterialByteStringBenchmarkSubject
     extends KmipBenchmarkSubject<KeyMaterialByteString> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link KeyMaterialByteStringBenchmarkSubject}.
+   */
   public KeyMaterialByteStringBenchmarkSubject() throws Exception {
     KeyMaterialByteString keyMaterialByteString =
         KeyMaterialByteString.of(new byte[] {0x01, 0x02, 0x03});

@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.HashOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link HashOpRequestPayload}.
+ */
 public class HashOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<HashOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link HashOpRequestPayloadBenchmarkSubject}.
+   */
   public HashOpRequestPayloadBenchmarkSubject() throws Exception {
     HashOpRequestPayload subject = HashOpRequestPayload
         .builder()

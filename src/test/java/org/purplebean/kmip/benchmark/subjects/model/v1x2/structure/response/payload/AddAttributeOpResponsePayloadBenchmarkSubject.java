@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.AddAttributeOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link AddAttributeOpResponsePayload}.
+ */
 public class AddAttributeOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<AddAttributeOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link AddAttributeOpResponsePayloadBenchmarkSubject}.
+   */
   public AddAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
     AddAttributeOpResponsePayload subject = AddAttributeOpResponsePayload
         .builder()

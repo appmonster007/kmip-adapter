@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v3x0.structure.request.RequestBatchItem;
 
+/**
+ * Benchmark subject for {@link RequestBatchItem}.
+ */
 public class RequestBatchItemBenchmarkSubject extends KmipBenchmarkSubject<RequestBatchItem> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link RequestBatchItemBenchmarkSubject}.
+   */
   public RequestBatchItemBenchmarkSubject() throws Exception {
     RequestBatchItem subject = RequestBatchItem
         .builder()

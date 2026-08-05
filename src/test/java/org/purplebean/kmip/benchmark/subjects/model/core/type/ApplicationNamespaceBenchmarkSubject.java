@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ApplicationNamespace;
 
+/**
+ * Benchmark subject for {@link ApplicationNamespace}.
+ */
 public class ApplicationNamespaceBenchmarkSubject
     extends KmipBenchmarkSubject<ApplicationNamespace> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ApplicationNamespaceBenchmarkSubject}.
+   */
   public ApplicationNamespaceBenchmarkSubject() throws Exception {
     ApplicationNamespace applicationNamespace = ApplicationNamespace
         .builder()

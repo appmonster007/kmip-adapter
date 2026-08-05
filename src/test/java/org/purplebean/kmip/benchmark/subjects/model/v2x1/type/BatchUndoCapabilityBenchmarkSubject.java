@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.BatchUndoCapability;
 
+/**
+ * Benchmark subject for {@link BatchUndoCapability}.
+ */
 public class BatchUndoCapabilityBenchmarkSubject extends KmipBenchmarkSubject<BatchUndoCapability> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link BatchUndoCapabilityBenchmarkSubject}.
+   */
   public BatchUndoCapabilityBenchmarkSubject() throws Exception {
     BatchUndoCapability subject = BatchUndoCapability.of(true);
     initialize(subject, BatchUndoCapability.class);

@@ -3,8 +3,14 @@ package org.purplebean.kmip.benchmark.subjects.model.v2x1.enumeration;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.enumeration.AdjustmentType;
 
+/**
+ * Benchmark subject for {@link AdjustmentType}.
+ */
 public class AdjustmentTypeBenchmarkSubject extends KmipBenchmarkSubject<AdjustmentType> {
 
+  /**
+   * Constructs a new {@link AdjustmentTypeBenchmarkSubject}.
+   */
   public AdjustmentTypeBenchmarkSubject() throws Exception {
     AdjustmentType adjustmentType = AdjustmentType.Standard.INCREMENT.inst();
     initialize(adjustmentType, AdjustmentType.class);

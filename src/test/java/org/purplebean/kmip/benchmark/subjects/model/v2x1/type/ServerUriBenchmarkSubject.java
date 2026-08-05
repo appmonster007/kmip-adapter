@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.ServerUri;
 
+/**
+ * Benchmark subject for {@link ServerUri}.
+ */
 public class ServerUriBenchmarkSubject extends KmipBenchmarkSubject<ServerUri> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ServerUriBenchmarkSubject}.
+   */
   public ServerUriBenchmarkSubject() throws Exception {
     ServerUri subject = ServerUri.of("default-string");
     initialize(subject, ServerUri.class);

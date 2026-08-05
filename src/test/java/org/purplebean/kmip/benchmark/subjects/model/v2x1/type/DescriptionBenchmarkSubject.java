@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.Description;
 
+/**
+ * Benchmark subject for {@link Description}.
+ */
 public class DescriptionBenchmarkSubject extends KmipBenchmarkSubject<Description> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link DescriptionBenchmarkSubject}.
+   */
   public DescriptionBenchmarkSubject() throws Exception {
     Description subject = Description.of("default-string");
     initialize(subject, Description.class);

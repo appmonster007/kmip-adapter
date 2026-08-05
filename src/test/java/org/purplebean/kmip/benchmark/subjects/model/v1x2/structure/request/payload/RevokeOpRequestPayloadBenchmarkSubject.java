@@ -11,12 +11,18 @@ import org.purplebean.kmip.model.core.type.CompromiseOccurrenceDate;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.RevokeOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link RevokeOpRequestPayload}.
+ */
 public class RevokeOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<RevokeOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link RevokeOpRequestPayloadBenchmarkSubject}.
+   */
   public RevokeOpRequestPayloadBenchmarkSubject() throws Exception {
     RevokeOpRequestPayload subject = RevokeOpRequestPayload
         .builder()

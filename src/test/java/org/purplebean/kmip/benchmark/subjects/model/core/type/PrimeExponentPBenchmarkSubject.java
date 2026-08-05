@@ -6,11 +6,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.PrimeExponentP;
 
+/**
+ * Benchmark subject for {@link PrimeExponentP}.
+ */
 public class PrimeExponentPBenchmarkSubject extends KmipBenchmarkSubject<PrimeExponentP> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link PrimeExponentPBenchmarkSubject}.
+   */
   public PrimeExponentPBenchmarkSubject() throws Exception {
     PrimeExponentP primeExponentP = PrimeExponentP
         .builder()

@@ -5,8 +5,14 @@ import org.purplebean.kmip.model.core.structure.CertificateIssuer;
 import org.purplebean.kmip.model.core.type.CertificateIssuerAlternativeName;
 import org.purplebean.kmip.model.core.type.CertificateIssuerDistinguishedName;
 
+/**
+ * Benchmark subject for {@link CertificateIssuer}.
+ */
 public class CertificateIssuerBenchmarkSubject extends KmipBenchmarkSubject<CertificateIssuer> {
 
+  /**
+   * Constructs a new {@link CertificateIssuerBenchmarkSubject}.
+   */
   public CertificateIssuerBenchmarkSubject() throws Exception {
     CertificateIssuer certificateIssuer = CertificateIssuer
         .builder()

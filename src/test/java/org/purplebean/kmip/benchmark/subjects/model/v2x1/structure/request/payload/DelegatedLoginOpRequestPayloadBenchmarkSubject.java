@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.v2x1.structure.Rights;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.DelegatedLoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * Benchmark subject for {@link DelegatedLoginOpRequestPayload}.
+ */
 public class DelegatedLoginOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DelegatedLoginOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link DelegatedLoginOpRequestPayloadBenchmarkSubject}.
+   */
   public DelegatedLoginOpRequestPayloadBenchmarkSubject() throws Exception {
     DelegatedLoginOpRequestPayload subject = DelegatedLoginOpRequestPayload
         .builder()

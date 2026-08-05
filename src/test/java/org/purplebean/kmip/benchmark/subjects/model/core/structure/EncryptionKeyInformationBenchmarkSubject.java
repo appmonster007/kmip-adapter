@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.CryptographicParameters;
 import org.purplebean.kmip.model.core.structure.EncryptionKeyInformation;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 
+/**
+ * Benchmark subject for {@link EncryptionKeyInformation}.
+ */
 public class EncryptionKeyInformationBenchmarkSubject
     extends KmipBenchmarkSubject<EncryptionKeyInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link EncryptionKeyInformationBenchmarkSubject}.
+   */
   public EncryptionKeyInformationBenchmarkSubject() throws Exception {
     EncryptionKeyInformation subject = EncryptionKeyInformation.of(
         UniqueIdentifier.of("fb44abe3-9721-43e0-a7d1-2568afe77d27"),

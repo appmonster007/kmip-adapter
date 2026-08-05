@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.structure.ProtocolVersion;
 import org.purplebean.kmip.model.v3x0.structure.request.RequestHeader;
 
+/**
+ * Benchmark subject for {@link RequestHeader}.
+ */
 public class RequestHeaderBenchmarkSubject extends KmipBenchmarkSubject<RequestHeader> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link RequestHeaderBenchmarkSubject}.
+   */
   public RequestHeaderBenchmarkSubject() throws Exception {
     RequestHeader subject = RequestHeader
         .builder()

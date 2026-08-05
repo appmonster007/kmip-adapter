@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.SubjectAlternativeName;
 
+/**
+ * Benchmark subject for {@link SubjectAlternativeName}.
+ */
 public class SubjectAlternativeNameBenchmarkSubject
     extends KmipBenchmarkSubject<SubjectAlternativeName> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link SubjectAlternativeNameBenchmarkSubject}.
+   */
   public SubjectAlternativeNameBenchmarkSubject() throws Exception {
     SubjectAlternativeName subjectAlternativeName =
         SubjectAlternativeName.of(new byte[] {0x01, 0x02, 0x03});

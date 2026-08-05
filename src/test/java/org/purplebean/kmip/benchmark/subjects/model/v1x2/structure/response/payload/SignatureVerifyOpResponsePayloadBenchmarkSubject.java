@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.enumeration.ValidityIndicator;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.SignatureVerifyOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link SignatureVerifyOpResponsePayload}.
+ */
 public class SignatureVerifyOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<SignatureVerifyOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link SignatureVerifyOpResponsePayloadBenchmarkSubject}.
+   */
   public SignatureVerifyOpResponsePayloadBenchmarkSubject() throws Exception {
     SignatureVerifyOpResponsePayload subject = SignatureVerifyOpResponsePayload
         .builder()

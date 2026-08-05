@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.KeyValueLocationValue;
 
+/**
+ * Benchmark subject for {@link KeyValueLocationValue}.
+ */
 public class KeyValueLocationValueBenchmarkSubject
     extends KmipBenchmarkSubject<KeyValueLocationValue> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link KeyValueLocationValueBenchmarkSubject}.
+   */
   public KeyValueLocationValueBenchmarkSubject() throws Exception {
     KeyValueLocationValue keyValueLocationValue = KeyValueLocationValue
         .builder()

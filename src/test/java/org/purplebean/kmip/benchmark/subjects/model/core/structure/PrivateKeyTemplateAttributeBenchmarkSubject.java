@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 
+/**
+ * Benchmark subject for {@link PrivateKeyTemplateAttribute}.
+ */
 public class PrivateKeyTemplateAttributeBenchmarkSubject
     extends KmipBenchmarkSubject<PrivateKeyTemplateAttribute> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link PrivateKeyTemplateAttributeBenchmarkSubject}.
+   */
   public PrivateKeyTemplateAttributeBenchmarkSubject() throws Exception {
     PrivateKeyTemplateAttribute subject = PrivateKeyTemplateAttribute
         .builder()

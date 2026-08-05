@@ -5,8 +5,14 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ProcessStartDate;
 
+/**
+ * Benchmark subject for {@link ProcessStartDate}.
+ */
 public class ProcessStartDateBenchmarkSubject extends KmipBenchmarkSubject<ProcessStartDate> {
 
+  /**
+   * Constructs a new {@link ProcessStartDateBenchmarkSubject}.
+   */
   public ProcessStartDateBenchmarkSubject() throws Exception {
     ProcessStartDate processStartDate = ProcessStartDate
         .builder()

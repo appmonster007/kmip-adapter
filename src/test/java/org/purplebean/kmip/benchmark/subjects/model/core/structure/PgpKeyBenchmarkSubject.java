@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.PgpKey;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * Benchmark subject for {@link PgpKey}.
+ */
 public class PgpKeyBenchmarkSubject extends KmipBenchmarkSubject<PgpKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link PgpKeyBenchmarkSubject}.
+   */
   public PgpKeyBenchmarkSubject() throws Exception {
     PgpKey subject = PgpKey
         .builder()

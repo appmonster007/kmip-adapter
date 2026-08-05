@@ -5,8 +5,14 @@ import org.purplebean.kmip.model.core.enumeration.LinkType;
 import org.purplebean.kmip.model.core.structure.Link;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * Benchmark subject for {@link Link}.
+ */
 public class LinkBenchmarkSubject extends KmipBenchmarkSubject<Link> {
 
+  /**
+   * Constructs a new {@link LinkBenchmarkSubject}.
+   */
   public LinkBenchmarkSubject() throws Exception {
     Link link = Link
         .builder()

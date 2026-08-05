@@ -11,12 +11,18 @@ import org.purplebean.kmip.model.core.type.MaximumItems;
 import org.purplebean.kmip.model.core.type.StorageStatusMask;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.LocateOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link LocateOpRequestPayload}.
+ */
 public class LocateOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<LocateOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link LocateOpRequestPayloadBenchmarkSubject}.
+   */
   public LocateOpRequestPayloadBenchmarkSubject() throws Exception {
     LocateOpRequestPayload subject = LocateOpRequestPayload
         .builder()

@@ -6,11 +6,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.Q;
 
+/**
+ * Benchmark subject for {@link Q}.
+ */
 public class QBenchmarkSubject extends KmipBenchmarkSubject<Q> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link QBenchmarkSubject}.
+   */
   public QBenchmarkSubject() throws Exception {
     Q q = Q
         .builder()

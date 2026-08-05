@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * Benchmark subject for {@link TransparentDsaPublicKey}.
+ */
 public class TransparentDsaPublicKeyBenchmarkSubject
     extends KmipBenchmarkSubject<TransparentDsaPublicKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link TransparentDsaPublicKeyBenchmarkSubject}.
+   */
   public TransparentDsaPublicKeyBenchmarkSubject() throws Exception {
     TransparentDsaPublicKey transparentDsaPublicKey = TransparentDsaPublicKey.of(
         P.of(BigInteger.valueOf(1)),

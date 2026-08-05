@@ -17,11 +17,17 @@ import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseHeader;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseMessage;
 
+/**
+ * Benchmark subject for {@link ResponseMessage}.
+ */
 public class ResponseMessageBenchmarkSubject extends KmipBenchmarkSubject<ResponseMessage> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ResponseMessageBenchmarkSubject}.
+   */
   public ResponseMessageBenchmarkSubject() throws Exception {
     KmipContext.setSpec(spec);
     ResponseMessage subject = ResponseMessage

@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.InteropOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link InteropOpResponsePayload}.
+ */
 public class InteropOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<InteropOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link InteropOpResponsePayloadBenchmarkSubject}.
+   */
   public InteropOpResponsePayloadBenchmarkSubject() throws Exception {
     InteropOpResponsePayload subject = InteropOpResponsePayload
         .builder()

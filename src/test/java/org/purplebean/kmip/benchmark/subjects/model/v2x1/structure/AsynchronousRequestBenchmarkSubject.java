@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.type.AsynchronousCorrelationValue;
 import org.purplebean.kmip.model.v2x1.enumeration.ProcessingStage;
 import org.purplebean.kmip.model.v2x1.structure.AsynchronousRequest;
 
+/**
+ * Benchmark subject for {@link AsynchronousRequest}.
+ */
 public class AsynchronousRequestBenchmarkSubject extends KmipBenchmarkSubject<AsynchronousRequest> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link AsynchronousRequestBenchmarkSubject}.
+   */
   public AsynchronousRequestBenchmarkSubject() throws Exception {
     AsynchronousRequest subject =
         AsynchronousRequest.of(AsynchronousCorrelationValue.of(new byte[] {0x01}),

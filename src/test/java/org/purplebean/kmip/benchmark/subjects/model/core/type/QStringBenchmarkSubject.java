@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * Benchmark subject for {@link QString}.
+ */
 public class QStringBenchmarkSubject extends KmipBenchmarkSubject<QString> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link QStringBenchmarkSubject}.
+   */
   public QStringBenchmarkSubject() throws Exception {
     QString qString = QString.of("test-qstring".getBytes());
     initialize(qString, QString.class);

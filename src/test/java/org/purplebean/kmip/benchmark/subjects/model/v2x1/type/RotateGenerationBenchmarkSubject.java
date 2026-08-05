@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.RotateGeneration;
 
+/**
+ * Benchmark subject for {@link RotateGeneration}.
+ */
 public class RotateGenerationBenchmarkSubject extends KmipBenchmarkSubject<RotateGeneration> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link RotateGenerationBenchmarkSubject}.
+   */
   public RotateGenerationBenchmarkSubject() throws Exception {
     RotateGeneration subject = RotateGeneration.of(123);
     initialize(subject, RotateGeneration.class);

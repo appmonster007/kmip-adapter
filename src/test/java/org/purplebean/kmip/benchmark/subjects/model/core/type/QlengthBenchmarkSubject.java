@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.Qlength;
 
+/**
+ * Benchmark subject for {@link Qlength}.
+ */
 public class QlengthBenchmarkSubject extends KmipBenchmarkSubject<Qlength> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link QlengthBenchmarkSubject}.
+   */
   public QlengthBenchmarkSubject() throws Exception {
     Qlength qlength = Qlength
         .builder()

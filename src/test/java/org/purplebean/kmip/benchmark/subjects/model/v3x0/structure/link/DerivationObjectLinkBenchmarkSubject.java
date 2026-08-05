@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v3x0.structure.link.DerivationObjectLink;
 
+/**
+ * Benchmark subject for {@link DerivationObjectLink}.
+ */
 public class DerivationObjectLinkBenchmarkSubject
     extends KmipBenchmarkSubject<DerivationObjectLink> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link DerivationObjectLinkBenchmarkSubject}.
+   */
   public DerivationObjectLinkBenchmarkSubject() throws Exception {
     DerivationObjectLink subject = DerivationObjectLink.of(UniqueIdentifier.of("test-id"));
     initialize(subject, DerivationObjectLink.class);

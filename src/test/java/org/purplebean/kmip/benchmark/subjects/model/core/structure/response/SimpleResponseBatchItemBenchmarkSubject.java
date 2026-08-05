@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.structure.response.SimpleResponseBatchItem
 import org.purplebean.kmip.model.core.structure.response.SimpleResponsePayload;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 
+/**
+ * Benchmark subject for {@link SimpleResponseBatchItem}.
+ */
 public class SimpleResponseBatchItemBenchmarkSubject
     extends KmipBenchmarkSubject<SimpleResponseBatchItem> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SimpleResponseBatchItemBenchmarkSubject}.
+   */
   public SimpleResponseBatchItemBenchmarkSubject() throws Exception {
     SimpleResponseBatchItem subject = SimpleResponseBatchItem
         .builder()

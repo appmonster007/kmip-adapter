@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.Offset;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ReKeyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link ReKeyOpRequestPayload}.
+ */
 public class ReKeyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ReKeyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ReKeyOpRequestPayloadBenchmarkSubject}.
+   */
   public ReKeyOpRequestPayloadBenchmarkSubject() throws Exception {
     ReKeyOpRequestPayload subject = ReKeyOpRequestPayload
         .builder()

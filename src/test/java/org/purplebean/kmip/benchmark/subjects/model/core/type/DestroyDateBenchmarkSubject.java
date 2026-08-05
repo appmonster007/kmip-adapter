@@ -5,8 +5,14 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.DestroyDate;
 
+/**
+ * Benchmark subject for {@link DestroyDate}.
+ */
 public class DestroyDateBenchmarkSubject extends KmipBenchmarkSubject<DestroyDate> {
 
+  /**
+   * Constructs a new {@link DestroyDateBenchmarkSubject}.
+   */
   public DestroyDateBenchmarkSubject() throws Exception {
     var fixed = OffsetDateTime.of(2024, 1, 2, 3, 4, 5, 0, ZoneOffset.UTC);
     DestroyDate destroyDate = DestroyDate

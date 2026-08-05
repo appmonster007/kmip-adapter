@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.DeleteAttributeOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link DeleteAttributeOpResponsePayload}.
+ */
 public class DeleteAttributeOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DeleteAttributeOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link DeleteAttributeOpResponsePayloadBenchmarkSubject}.
+   */
   public DeleteAttributeOpResponsePayloadBenchmarkSubject() throws Exception {
     DeleteAttributeOpResponsePayload subject = DeleteAttributeOpResponsePayload
         .builder()

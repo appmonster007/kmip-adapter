@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.core.enumeration.State;
 import org.purplebean.kmip.model.core.structure.CustomAttribute;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 
+/**
+ * Benchmark subject for {@link CustomAttribute}.
+ */
 public class CustomAttributeBenchmarkSubject extends KmipBenchmarkSubject<CustomAttribute> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CustomAttributeBenchmarkSubject}.
+   */
   public CustomAttributeBenchmarkSubject() throws Exception {
     CustomAttribute customAttribute =
         CustomAttribute.of("x-custom-state", AttributeValue.ofEnumeration(State.Standard.ACTIVE));

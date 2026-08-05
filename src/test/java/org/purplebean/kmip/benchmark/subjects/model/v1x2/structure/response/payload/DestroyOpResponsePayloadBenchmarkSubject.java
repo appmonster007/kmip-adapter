@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.DestroyOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link DestroyOpResponsePayload}.
+ */
 public class DestroyOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DestroyOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link DestroyOpResponsePayloadBenchmarkSubject}.
+   */
   public DestroyOpResponsePayloadBenchmarkSubject() throws Exception {
     DestroyOpResponsePayload subject = DestroyOpResponsePayload
         .builder()

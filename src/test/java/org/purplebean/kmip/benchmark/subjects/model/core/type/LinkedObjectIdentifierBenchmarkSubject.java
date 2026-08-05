@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.LinkedObjectIdentifier;
 
+/**
+ * Benchmark subject for {@link LinkedObjectIdentifier}.
+ */
 public class LinkedObjectIdentifierBenchmarkSubject
     extends KmipBenchmarkSubject<LinkedObjectIdentifier> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link LinkedObjectIdentifierBenchmarkSubject}.
+   */
   public LinkedObjectIdentifierBenchmarkSubject() throws Exception {
     LinkedObjectIdentifier linkedObjectIdentifier = LinkedObjectIdentifier
         .builder()

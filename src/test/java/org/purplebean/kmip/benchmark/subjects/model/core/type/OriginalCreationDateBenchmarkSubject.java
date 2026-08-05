@@ -5,9 +5,15 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.OriginalCreationDate;
 
+/**
+ * Benchmark subject for {@link OriginalCreationDate}.
+ */
 public class OriginalCreationDateBenchmarkSubject
     extends KmipBenchmarkSubject<OriginalCreationDate> {
 
+  /**
+   * Constructs a new {@link OriginalCreationDateBenchmarkSubject}.
+   */
   public OriginalCreationDateBenchmarkSubject() throws Exception {
     OriginalCreationDate originalCreationDate = OriginalCreationDate
         .builder()

@@ -11,11 +11,17 @@ import org.purplebean.kmip.model.core.type.BatchCount;
 import org.purplebean.kmip.model.core.type.TimeStamp;
 import org.purplebean.kmip.model.v2x1.structure.response.ResponseHeader;
 
+/**
+ * Benchmark subject for {@link ResponseHeader}.
+ */
 public class ResponseHeaderBenchmarkSubject extends KmipBenchmarkSubject<ResponseHeader> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link ResponseHeaderBenchmarkSubject}.
+   */
   public ResponseHeaderBenchmarkSubject() throws Exception {
     KmipContext.setSpec(getSpec());
     ResponseHeader subject = ResponseHeader

@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.QuantumSafeCapability;
 
+/**
+ * Benchmark subject for {@link QuantumSafeCapability}.
+ */
 public class QuantumSafeCapabilityBenchmarkSubject
     extends KmipBenchmarkSubject<QuantumSafeCapability> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link QuantumSafeCapabilityBenchmarkSubject}.
+   */
   public QuantumSafeCapabilityBenchmarkSubject() throws Exception {
     QuantumSafeCapability subject = QuantumSafeCapability.of(true);
     initialize(subject, QuantumSafeCapability.class);

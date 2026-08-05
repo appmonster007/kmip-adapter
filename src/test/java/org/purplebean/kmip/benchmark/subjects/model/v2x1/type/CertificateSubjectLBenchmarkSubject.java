@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.CertificateSubjectL;
 
+/**
+ * Benchmark subject for {@link CertificateSubjectL}.
+ */
 public class CertificateSubjectLBenchmarkSubject extends KmipBenchmarkSubject<CertificateSubjectL> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CertificateSubjectLBenchmarkSubject}.
+   */
   public CertificateSubjectLBenchmarkSubject() throws Exception {
     CertificateSubjectL subject = CertificateSubjectL.of("default-string");
     initialize(subject, CertificateSubjectL.class);

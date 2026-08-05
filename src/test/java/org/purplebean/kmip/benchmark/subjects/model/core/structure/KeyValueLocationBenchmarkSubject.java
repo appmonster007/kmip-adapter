@@ -5,8 +5,14 @@ import org.purplebean.kmip.model.core.enumeration.KeyValueLocationType;
 import org.purplebean.kmip.model.core.structure.KeyValueLocation;
 import org.purplebean.kmip.model.core.type.KeyValueLocationValue;
 
+/**
+ * Benchmark subject for {@link KeyValueLocation}.
+ */
 public class KeyValueLocationBenchmarkSubject extends KmipBenchmarkSubject<KeyValueLocation> {
 
+  /**
+   * Constructs a new {@link KeyValueLocationBenchmarkSubject}.
+   */
   public KeyValueLocationBenchmarkSubject() throws Exception {
     KeyValueLocation keyvaluelocation = KeyValueLocation
         .builder()

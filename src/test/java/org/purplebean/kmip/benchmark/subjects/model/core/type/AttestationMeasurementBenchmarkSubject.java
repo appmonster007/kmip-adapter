@@ -6,12 +6,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.AttestationMeasurement;
 
+/**
+ * Benchmark subject for {@link AttestationMeasurement}.
+ */
 public class AttestationMeasurementBenchmarkSubject
     extends KmipBenchmarkSubject<AttestationMeasurement> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link AttestationMeasurementBenchmarkSubject}.
+   */
   public AttestationMeasurementBenchmarkSubject() throws Exception {
     AttestationMeasurement subject =
         AttestationMeasurement.of(ByteBuffer.wrap(new byte[] {0x01, 0x02, 0x03}));

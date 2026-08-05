@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.MacVerifyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link MacVerifyOpRequestPayload}.
+ */
 public class MacVerifyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<MacVerifyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link MacVerifyOpRequestPayloadBenchmarkSubject}.
+   */
   public MacVerifyOpRequestPayloadBenchmarkSubject() throws Exception {
     MacVerifyOpRequestPayload subject = MacVerifyOpRequestPayload
         .builder()

@@ -6,12 +6,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.structure.request.SimpleRequestPayload;
 
+/**
+ * Benchmark subject for {@link SimpleRequestPayload}.
+ */
 public class SimpleRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<SimpleRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SimpleRequestPayloadBenchmarkSubject}.
+   */
   public SimpleRequestPayloadBenchmarkSubject() throws Exception {
     SimpleRequestPayload subject = SimpleRequestPayload
         .builder()

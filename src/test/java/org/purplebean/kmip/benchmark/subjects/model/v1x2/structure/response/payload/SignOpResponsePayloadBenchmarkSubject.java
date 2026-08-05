@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.SignatureData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.SignOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link SignOpResponsePayload}.
+ */
 public class SignOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<SignOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link SignOpResponsePayloadBenchmarkSubject}.
+   */
   public SignOpResponsePayloadBenchmarkSubject() throws Exception {
     SignOpResponsePayload subject = SignOpResponsePayload
         .builder()

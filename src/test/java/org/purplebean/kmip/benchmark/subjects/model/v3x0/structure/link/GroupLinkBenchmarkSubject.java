@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v3x0.structure.link.GroupLink;
 
+/**
+ * Benchmark subject for {@link GroupLink}.
+ */
 public class GroupLinkBenchmarkSubject extends KmipBenchmarkSubject<GroupLink> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link GroupLinkBenchmarkSubject}.
+   */
   public GroupLinkBenchmarkSubject() throws Exception {
     GroupLink subject = GroupLink.of("test-id");
     initialize(subject, GroupLink.class);

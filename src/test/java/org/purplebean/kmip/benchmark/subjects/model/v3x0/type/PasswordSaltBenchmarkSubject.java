@@ -6,11 +6,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v3x0.type.PasswordSalt;
 
+/**
+ * Benchmark subject for {@link PasswordSalt}.
+ */
 public class PasswordSaltBenchmarkSubject extends KmipBenchmarkSubject<PasswordSalt> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link PasswordSaltBenchmarkSubject}.
+   */
   public PasswordSaltBenchmarkSubject() throws Exception {
     PasswordSalt subject = PasswordSalt.of(
         ByteBuffer.wrap(new byte[] {0x01, 0x02, 0x03}));  // TODO: Create a default instance

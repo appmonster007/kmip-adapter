@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.enumeration.ObjectType;
 import org.purplebean.kmip.model.v2x1.structure.Attributes;
 import org.purplebean.kmip.model.v2x1.structure.ObjectDefaults;
 
+/**
+ * Benchmark subject for {@link ObjectDefaults}.
+ */
 public class ObjectDefaultsBenchmarkSubject extends KmipBenchmarkSubject<ObjectDefaults> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link ObjectDefaultsBenchmarkSubject}.
+   */
   public ObjectDefaultsBenchmarkSubject() throws Exception {
     ObjectDefaults subject = ObjectDefaults
         .builder()

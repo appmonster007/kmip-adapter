@@ -11,12 +11,18 @@ import org.purplebean.kmip.model.core.type.P;
 import org.purplebean.kmip.model.core.type.Q;
 import org.purplebean.kmip.model.core.type.Y;
 
+/**
+ * Benchmark subject for {@link TransparentDhPublicKey}.
+ */
 public class TransparentDhPublicKeyBenchmarkSubject
     extends KmipBenchmarkSubject<TransparentDhPublicKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link TransparentDhPublicKeyBenchmarkSubject}.
+   */
   public TransparentDhPublicKeyBenchmarkSubject() throws Exception {
     TransparentDhPublicKey transparentDhPublicKey = TransparentDhPublicKey.of(
         P.of(BigInteger.valueOf(1)),

@@ -6,11 +6,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.PrimeFieldSize;
 
+/**
+ * Benchmark subject for {@link PrimeFieldSize}.
+ */
 public class PrimeFieldSizeBenchmarkSubject extends KmipBenchmarkSubject<PrimeFieldSize> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link PrimeFieldSizeBenchmarkSubject}.
+   */
   public PrimeFieldSizeBenchmarkSubject() throws Exception {
     PrimeFieldSize primeFieldSize = PrimeFieldSize
         .builder()

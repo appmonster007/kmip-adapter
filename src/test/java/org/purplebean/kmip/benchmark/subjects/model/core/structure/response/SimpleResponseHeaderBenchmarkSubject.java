@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.response.SimpleResponseHeader;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMajor;
 import org.purplebean.kmip.model.core.type.ProtocolVersionMinor;
 
+/**
+ * Benchmark subject for {@link SimpleResponseHeader}.
+ */
 public class SimpleResponseHeaderBenchmarkSubject
     extends KmipBenchmarkSubject<SimpleResponseHeader> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SimpleResponseHeaderBenchmarkSubject}.
+   */
   public SimpleResponseHeaderBenchmarkSubject() throws Exception {
     SimpleResponseHeader subject = SimpleResponseHeader
         .builder()

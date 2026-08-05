@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.CertificateLength;
 
+/**
+ * Benchmark subject for {@link CertificateLength}.
+ */
 public class CertificateLengthBenchmarkSubject extends KmipBenchmarkSubject<CertificateLength> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CertificateLengthBenchmarkSubject}.
+   */
   public CertificateLengthBenchmarkSubject() throws Exception {
     Integer value = 10;
     CertificateLength certificateLength = CertificateLength

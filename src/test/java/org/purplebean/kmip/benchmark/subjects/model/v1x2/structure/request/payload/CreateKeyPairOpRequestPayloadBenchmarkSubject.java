@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.structure.PrivateKeyTemplateAttribute;
 import org.purplebean.kmip.model.core.structure.PublicKeyTemplateAttribute;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateKeyPairOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link CreateKeyPairOpRequestPayload}.
+ */
 public class CreateKeyPairOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CreateKeyPairOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CreateKeyPairOpRequestPayloadBenchmarkSubject}.
+   */
   public CreateKeyPairOpRequestPayloadBenchmarkSubject() throws Exception {
     CreateKeyPairOpRequestPayload subject = CreateKeyPairOpRequestPayload
         .builder()

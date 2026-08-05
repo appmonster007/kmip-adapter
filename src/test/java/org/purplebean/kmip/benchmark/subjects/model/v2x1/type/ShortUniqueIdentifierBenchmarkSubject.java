@@ -6,12 +6,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.ShortUniqueIdentifier;
 
+/**
+ * Benchmark subject for {@link ShortUniqueIdentifier}.
+ */
 public class ShortUniqueIdentifierBenchmarkSubject
     extends KmipBenchmarkSubject<ShortUniqueIdentifier> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1;
 
+  /**
+   * Constructs a new {@link ShortUniqueIdentifierBenchmarkSubject}.
+   */
   public ShortUniqueIdentifierBenchmarkSubject() throws Exception {
     ShortUniqueIdentifier subject =
         ShortUniqueIdentifier.of(ByteBuffer.wrap(new byte[] {0x01, 0x02, 0x03}));

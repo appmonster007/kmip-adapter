@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.SignOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link SignOpRequestPayload}.
+ */
 public class SignOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<SignOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SignOpRequestPayloadBenchmarkSubject}.
+   */
   public SignOpRequestPayloadBenchmarkSubject() throws Exception {
     SignOpRequestPayload subject = SignOpRequestPayload
         .builder()

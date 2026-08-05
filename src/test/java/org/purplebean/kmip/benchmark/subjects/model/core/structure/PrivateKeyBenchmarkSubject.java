@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.PrivateKey;
 
+/**
+ * Benchmark subject for {@link PrivateKey}.
+ */
 public class PrivateKeyBenchmarkSubject extends KmipBenchmarkSubject<PrivateKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link PrivateKeyBenchmarkSubject}.
+   */
   public PrivateKeyBenchmarkSubject() throws Exception {
     PrivateKey subject = PrivateKey
         .builder()

@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.v2x1.structure.DefaultsInformation;
 import org.purplebean.kmip.model.v2x1.structure.ObjectDefaults;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.SetDefaultsOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link SetDefaultsOpRequestPayload}.
+ */
 public class SetDefaultsOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<SetDefaultsOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link SetDefaultsOpRequestPayloadBenchmarkSubject}.
+   */
   public SetDefaultsOpRequestPayloadBenchmarkSubject() throws Exception {
     SetDefaultsOpRequestPayload subject = SetDefaultsOpRequestPayload
         .builder()

@@ -8,12 +8,18 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.DeriveKeyOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link DeriveKeyOpResponsePayload}.
+ */
 public class DeriveKeyOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DeriveKeyOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link DeriveKeyOpResponsePayloadBenchmarkSubject}.
+   */
   public DeriveKeyOpResponsePayloadBenchmarkSubject() throws Exception {
     DeriveKeyOpResponsePayload subject = DeriveKeyOpResponsePayload
         .builder()

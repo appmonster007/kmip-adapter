@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.Attribute;
 
+/**
+ * Benchmark subject for {@link Attribute}.
+ */
 public class AttributeBenchmarkSubject extends KmipBenchmarkSubject<Attribute> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link AttributeBenchmarkSubject}.
+   */
   public AttributeBenchmarkSubject() throws Exception {
     Attribute subject = Attribute
         .builder()

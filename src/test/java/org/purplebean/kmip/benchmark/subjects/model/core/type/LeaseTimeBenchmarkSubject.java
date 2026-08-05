@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.LeaseTime;
 
+/**
+ * Benchmark subject for {@link LeaseTime}.
+ */
 public class LeaseTimeBenchmarkSubject extends KmipBenchmarkSubject<LeaseTime> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link LeaseTimeBenchmarkSubject}.
+   */
   public LeaseTimeBenchmarkSubject() throws Exception {
     var fixed = 100;
     LeaseTime leaseTime = LeaseTime

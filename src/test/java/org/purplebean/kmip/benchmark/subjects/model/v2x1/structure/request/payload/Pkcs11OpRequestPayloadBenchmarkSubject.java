@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.enumeration.Pkcs11Function;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.Pkcs11OpRequestPayload;
 
+/**
+ * Benchmark subject for {@link Pkcs11OpRequestPayload}.
+ */
 public class Pkcs11OpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<Pkcs11OpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link Pkcs11OpRequestPayloadBenchmarkSubject}.
+   */
   public Pkcs11OpRequestPayloadBenchmarkSubject() throws Exception {
     Pkcs11OpRequestPayload subject = Pkcs11OpRequestPayload
         .builder()

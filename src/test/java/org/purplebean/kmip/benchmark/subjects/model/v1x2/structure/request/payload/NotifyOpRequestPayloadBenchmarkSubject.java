@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.NotifyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link NotifyOpRequestPayload}.
+ */
 public class NotifyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<NotifyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link NotifyOpRequestPayloadBenchmarkSubject}.
+   */
   public NotifyOpRequestPayloadBenchmarkSubject() throws Exception {
     NotifyOpRequestPayload subject = NotifyOpRequestPayload
         .builder()

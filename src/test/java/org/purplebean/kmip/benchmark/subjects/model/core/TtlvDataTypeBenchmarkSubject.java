@@ -11,11 +11,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.TtlvDataType;
 import org.purplebean.kmip.model.core.enumeration.NameType;
 
+/**
+ * Benchmark subject for {@link TtlvDataType}.
+ */
 public class TtlvDataTypeBenchmarkSubject extends KmipBenchmarkSubject<TtlvDataType> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link TtlvDataTypeBenchmarkSubject}.
+   */
   public TtlvDataTypeBenchmarkSubject() throws Exception {
     var supportedVersions = Set.of(KmipSpec.UnknownVersion, KmipSpec.V1_2);
     TtlvDataType subject = TtlvDataType.ofStructure(

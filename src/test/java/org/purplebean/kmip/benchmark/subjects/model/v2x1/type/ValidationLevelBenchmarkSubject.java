@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.ValidationLevel;
 
+/**
+ * Benchmark subject for {@link ValidationLevel}.
+ */
 public class ValidationLevelBenchmarkSubject extends KmipBenchmarkSubject<ValidationLevel> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ValidationLevelBenchmarkSubject}.
+   */
   public ValidationLevelBenchmarkSubject() throws Exception {
     ValidationLevel subject = ValidationLevel.of(123);
     initialize(subject, ValidationLevel.class);

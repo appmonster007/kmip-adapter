@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ContactInformation;
 
+/**
+ * Benchmark subject for {@link ContactInformation}.
+ */
 public class ContactInformationBenchmarkSubject extends KmipBenchmarkSubject<ContactInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ContactInformationBenchmarkSubject}.
+   */
   public ContactInformationBenchmarkSubject() throws Exception {
     var fixed = "test";
     ContactInformation contactInformation = ContactInformation

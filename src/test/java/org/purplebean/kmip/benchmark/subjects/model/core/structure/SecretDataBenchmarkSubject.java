@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.enumeration.SecretDataType;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.SecretData;
 
+/**
+ * Benchmark subject for {@link SecretData}.
+ */
 public class SecretDataBenchmarkSubject extends KmipBenchmarkSubject<SecretData> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SecretDataBenchmarkSubject}.
+   */
   public SecretDataBenchmarkSubject() throws Exception {
     SecretData subject = SecretData
         .builder()

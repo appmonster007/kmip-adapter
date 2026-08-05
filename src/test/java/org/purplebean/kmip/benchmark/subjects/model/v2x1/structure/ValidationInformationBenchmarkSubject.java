@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.enumeration.ValidationAuthorityType;
 import org.purplebean.kmip.model.core.enumeration.ValidationType;
 import org.purplebean.kmip.model.v2x1.structure.ValidationInformation;
 
+/**
+ * Benchmark subject for {@link ValidationInformation}.
+ */
 public class ValidationInformationBenchmarkSubject
     extends KmipBenchmarkSubject<ValidationInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ValidationInformationBenchmarkSubject}.
+   */
   public ValidationInformationBenchmarkSubject() throws Exception {
     ValidationInformation subject =
         ValidationInformation.of(ValidationAuthorityType.Standard.UNSPECIFIED.inst(),

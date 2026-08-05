@@ -5,9 +5,15 @@ import org.purplebean.kmip.model.core.structure.CertificateIdentifier;
 import org.purplebean.kmip.model.core.type.Issuer;
 import org.purplebean.kmip.model.core.type.SerialNumber;
 
+/**
+ * Benchmark subject for {@link CertificateIdentifier}.
+ */
 public class CertificateIdentifierBenchmarkSubject
     extends KmipBenchmarkSubject<CertificateIdentifier> {
 
+  /**
+   * Constructs a new {@link CertificateIdentifierBenchmarkSubject}.
+   */
   public CertificateIdentifierBenchmarkSubject() throws Exception {
     CertificateIdentifier certificateIdentifier = CertificateIdentifier
         .builder()

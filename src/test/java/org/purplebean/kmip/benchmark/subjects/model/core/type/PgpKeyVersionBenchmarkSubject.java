@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.PgpKeyVersion;
 
+/**
+ * Benchmark subject for {@link PgpKeyVersion}.
+ */
 public class PgpKeyVersionBenchmarkSubject extends KmipBenchmarkSubject<PgpKeyVersion> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link PgpKeyVersionBenchmarkSubject}.
+   */
   public PgpKeyVersionBenchmarkSubject() throws Exception {
     PgpKeyVersion subject = PgpKeyVersion.of(123);
     initialize(subject, PgpKeyVersion.class);

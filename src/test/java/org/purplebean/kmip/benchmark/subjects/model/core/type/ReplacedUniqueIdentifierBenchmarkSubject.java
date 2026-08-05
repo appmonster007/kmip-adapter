@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ReplacedUniqueIdentifier;
 
+/**
+ * Benchmark subject for {@link ReplacedUniqueIdentifier}.
+ */
 public class ReplacedUniqueIdentifierBenchmarkSubject
     extends KmipBenchmarkSubject<ReplacedUniqueIdentifier> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ReplacedUniqueIdentifierBenchmarkSubject}.
+   */
   public ReplacedUniqueIdentifierBenchmarkSubject() throws Exception {
     ReplacedUniqueIdentifier replacedUniqueIdentifier = ReplacedUniqueIdentifier
         .builder()

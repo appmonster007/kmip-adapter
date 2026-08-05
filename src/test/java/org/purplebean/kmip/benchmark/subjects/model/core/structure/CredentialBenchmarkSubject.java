@@ -9,11 +9,17 @@ import org.purplebean.kmip.model.core.structure.UsernameAndPassword;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.core.type.Username;
 
+/**
+ * Benchmark subject for {@link Credential}.
+ */
 public class CredentialBenchmarkSubject extends KmipBenchmarkSubject<Credential> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CredentialBenchmarkSubject}.
+   */
   public CredentialBenchmarkSubject() throws Exception {
     Credential subject = Credential
         .builder()

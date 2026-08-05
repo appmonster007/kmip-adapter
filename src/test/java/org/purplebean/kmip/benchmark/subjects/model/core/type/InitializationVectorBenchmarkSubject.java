@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.InitializationVector;
 
+/**
+ * Benchmark subject for {@link InitializationVector}.
+ */
 public class InitializationVectorBenchmarkSubject
     extends KmipBenchmarkSubject<InitializationVector> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link InitializationVectorBenchmarkSubject}.
+   */
   public InitializationVectorBenchmarkSubject() throws Exception {
     InitializationVector initializationVector =
         InitializationVector.of(new byte[] {0x01, 0x02, 0x03});

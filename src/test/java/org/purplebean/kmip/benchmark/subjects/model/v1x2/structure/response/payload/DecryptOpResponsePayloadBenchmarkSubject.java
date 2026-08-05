@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.DataByteString;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.DecryptOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link DecryptOpResponsePayload}.
+ */
 public class DecryptOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<DecryptOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link DecryptOpResponsePayloadBenchmarkSubject}.
+   */
   public DecryptOpResponsePayloadBenchmarkSubject() throws Exception {
     DecryptOpResponsePayload subject = DecryptOpResponsePayload
         .builder()

@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 
+/**
+ * Benchmark subject for {@link KeyBlock}.
+ */
 public class KeyBlockBenchmarkSubject extends KmipBenchmarkSubject<KeyBlock> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link KeyBlockBenchmarkSubject}.
+   */
   public KeyBlockBenchmarkSubject() throws Exception {
     KeyBlock subject = KeyBlock
         .builder()

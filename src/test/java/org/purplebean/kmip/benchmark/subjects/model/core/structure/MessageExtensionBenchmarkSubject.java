@@ -7,11 +7,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.structure.MessageExtension;
 import org.purplebean.kmip.model.core.type.VendorIdentification;
 
+/**
+ * Benchmark subject for {@link MessageExtension}.
+ */
 public class MessageExtensionBenchmarkSubject extends KmipBenchmarkSubject<MessageExtension> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link MessageExtensionBenchmarkSubject}.
+   */
   public MessageExtensionBenchmarkSubject() throws Exception {
     MessageExtension subject = MessageExtension
         .builder()

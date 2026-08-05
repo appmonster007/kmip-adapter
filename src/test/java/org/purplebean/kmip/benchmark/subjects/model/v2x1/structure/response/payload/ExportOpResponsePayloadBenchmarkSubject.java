@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.structure.Certificate;
 import org.purplebean.kmip.model.core.type.CertificateValue;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.ExportOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link ExportOpResponsePayload}.
+ */
 public class ExportOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ExportOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V2_1; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link ExportOpResponsePayloadBenchmarkSubject}.
+   */
   public ExportOpResponsePayloadBenchmarkSubject() throws Exception {
     ExportOpResponsePayload subject = ExportOpResponsePayload
         .builder()

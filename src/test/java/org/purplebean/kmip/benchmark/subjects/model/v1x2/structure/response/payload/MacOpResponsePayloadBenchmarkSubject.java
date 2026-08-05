@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.MacData;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.MacOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link MacOpResponsePayload}.
+ */
 public class MacOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<MacOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link MacOpResponsePayloadBenchmarkSubject}.
+   */
   public MacOpResponsePayloadBenchmarkSubject() throws Exception {
     MacOpResponsePayload subject = MacOpResponsePayload
         .builder()

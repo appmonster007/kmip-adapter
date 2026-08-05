@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v3x0.structure.link.PreviousLink;
 
+/**
+ * Benchmark subject for {@link PreviousLink}.
+ */
 public class PreviousLinkBenchmarkSubject extends KmipBenchmarkSubject<PreviousLink> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link PreviousLinkBenchmarkSubject}.
+   */
   public PreviousLinkBenchmarkSubject() throws Exception {
     PreviousLink subject = PreviousLink.of("test-id");
     initialize(subject, PreviousLink.class);

@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateSplitKeyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link CreateSplitKeyOpRequestPayload}.
+ */
 public class CreateSplitKeyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CreateSplitKeyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link CreateSplitKeyOpRequestPayloadBenchmarkSubject}.
+   */
   public CreateSplitKeyOpRequestPayloadBenchmarkSubject() throws Exception {
     CreateSplitKeyOpRequestPayload subject = CreateSplitKeyOpRequestPayload
         .builder()

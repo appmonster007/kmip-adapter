@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.structure.ExtensionInformation;
 import org.purplebean.kmip.model.core.type.ExtensionName;
 
+/**
+ * Benchmark subject for {@link ExtensionInformation}.
+ */
 public class ExtensionInformationBenchmarkSubject
     extends KmipBenchmarkSubject<ExtensionInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ExtensionInformationBenchmarkSubject}.
+   */
   public ExtensionInformationBenchmarkSubject() throws Exception {
     ExtensionInformation subject = ExtensionInformation
         .builder()

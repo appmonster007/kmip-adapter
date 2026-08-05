@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v3x0.enumeration.DeactivationReasonCode;
 import org.purplebean.kmip.model.v3x0.structure.DeactivationReason;
 
+/**
+ * Benchmark subject for {@link DeactivationReason}.
+ */
 public class DeactivationReasonBenchmarkSubject extends KmipBenchmarkSubject<DeactivationReason> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link DeactivationReasonBenchmarkSubject}.
+   */
   public DeactivationReasonBenchmarkSubject() throws Exception {
     DeactivationReason subject = DeactivationReason
         .builder()

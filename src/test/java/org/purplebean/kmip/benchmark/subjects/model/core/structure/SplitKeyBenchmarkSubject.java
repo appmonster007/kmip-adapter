@@ -11,11 +11,17 @@ import org.purplebean.kmip.model.core.type.KeyPartIdentifier;
 import org.purplebean.kmip.model.core.type.SplitKeyParts;
 import org.purplebean.kmip.model.core.type.SplitKeyThreshold;
 
+/**
+ * Benchmark subject for {@link SplitKey}.
+ */
 public class SplitKeyBenchmarkSubject extends KmipBenchmarkSubject<SplitKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SplitKeyBenchmarkSubject}.
+   */
   public SplitKeyBenchmarkSubject() throws Exception {
     SplitKey subject = SplitKey
         .builder()

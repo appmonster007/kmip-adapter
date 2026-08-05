@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.v2x1.enumeration.RotateNameType;
 import org.purplebean.kmip.model.v2x1.structure.RotateName;
 import org.purplebean.kmip.model.v2x1.type.RotateNameValue;
 
+/**
+ * Benchmark subject for {@link RotateName}.
+ */
 public class RotateNameBenchmarkSubject extends KmipBenchmarkSubject<RotateName> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link RotateNameBenchmarkSubject}.
+   */
   public RotateNameBenchmarkSubject() throws Exception {
     RotateName subject = RotateName.of(
         RotateNameValue.of("default"),

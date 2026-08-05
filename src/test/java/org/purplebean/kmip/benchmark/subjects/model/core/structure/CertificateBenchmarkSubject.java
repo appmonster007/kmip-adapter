@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.core.enumeration.CertificateType;
 import org.purplebean.kmip.model.core.structure.Certificate;
 import org.purplebean.kmip.model.core.type.CertificateValue;
 
+/**
+ * Benchmark subject for {@link Certificate}.
+ */
 public class CertificateBenchmarkSubject extends KmipBenchmarkSubject<Certificate> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CertificateBenchmarkSubject}.
+   */
   public CertificateBenchmarkSubject() throws Exception {
     Certificate subject = Certificate
         .builder()

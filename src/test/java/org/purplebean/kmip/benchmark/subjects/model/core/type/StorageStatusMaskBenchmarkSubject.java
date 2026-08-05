@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.StorageStatusMask;
 
+/**
+ * Benchmark subject for {@link StorageStatusMask}.
+ */
 public class StorageStatusMaskBenchmarkSubject extends KmipBenchmarkSubject<StorageStatusMask> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link StorageStatusMaskBenchmarkSubject}.
+   */
   public StorageStatusMaskBenchmarkSubject() throws Exception {
     StorageStatusMask storageStatusMask = StorageStatusMask
         .builder()

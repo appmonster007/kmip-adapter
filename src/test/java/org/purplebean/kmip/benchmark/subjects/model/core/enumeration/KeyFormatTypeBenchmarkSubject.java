@@ -3,8 +3,14 @@ package org.purplebean.kmip.benchmark.subjects.model.core.enumeration;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 
+/**
+ * Benchmark subject for {@link KeyFormatType}.
+ */
 public class KeyFormatTypeBenchmarkSubject extends KmipBenchmarkSubject<KeyFormatType> {
 
+  /**
+   * Constructs a new {@link KeyFormatTypeBenchmarkSubject}.
+   */
   public KeyFormatTypeBenchmarkSubject() throws Exception {
     KeyFormatType keyFormatType = KeyFormatType.Standard.RAW.inst();
     initialize(keyFormatType, KeyFormatType.class);

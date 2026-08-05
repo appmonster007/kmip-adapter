@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.core.structure.Nonce;
 import org.purplebean.kmip.model.core.type.NonceId;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * Benchmark subject for {@link Nonce}.
+ */
 public class NonceBenchmarkSubject extends KmipBenchmarkSubject<Nonce> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link NonceBenchmarkSubject}.
+   */
   public NonceBenchmarkSubject() throws Exception {
     Nonce subject = Nonce
         .builder()

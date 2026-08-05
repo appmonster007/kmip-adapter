@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.type.CertificateRequest;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CertifyOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link CertifyOpRequestPayload}.
+ */
 public class CertifyOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<CertifyOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link CertifyOpRequestPayloadBenchmarkSubject}.
+   */
   public CertifyOpRequestPayloadBenchmarkSubject() throws Exception {
     CertifyOpRequestPayload subject = CertifyOpRequestPayload
         .builder()

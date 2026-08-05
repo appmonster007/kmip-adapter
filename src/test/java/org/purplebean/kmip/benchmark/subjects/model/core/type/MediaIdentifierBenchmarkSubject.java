@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.MediaIdentifier;
 
+/**
+ * Benchmark subject for {@link MediaIdentifier}.
+ */
 public class MediaIdentifierBenchmarkSubject extends KmipBenchmarkSubject<MediaIdentifier> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link MediaIdentifierBenchmarkSubject}.
+   */
   public MediaIdentifierBenchmarkSubject() throws Exception {
     MediaIdentifier mediaIdentifier = MediaIdentifier
         .builder()

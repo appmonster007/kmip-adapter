@@ -7,11 +7,17 @@ import org.purplebean.kmip.model.core.enumeration.KeyFormatType;
 import org.purplebean.kmip.model.core.structure.KeyBlock;
 import org.purplebean.kmip.model.core.structure.SymmetricKey;
 
+/**
+ * Benchmark subject for {@link SymmetricKey}.
+ */
 public class SymmetricKeyBenchmarkSubject extends KmipBenchmarkSubject<SymmetricKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link SymmetricKeyBenchmarkSubject}.
+   */
   public SymmetricKeyBenchmarkSubject() throws Exception {
     SymmetricKey subject = SymmetricKey
         .builder()

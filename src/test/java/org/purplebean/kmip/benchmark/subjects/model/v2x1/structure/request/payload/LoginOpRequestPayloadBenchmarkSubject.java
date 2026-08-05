@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.type.UsageLimitsTotal;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.LoginOpRequestPayload;
 import org.purplebean.kmip.model.v2x1.type.RequestCount;
 
+/**
+ * Benchmark subject for {@link LoginOpRequestPayload}.
+ */
 public class LoginOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<LoginOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link LoginOpRequestPayloadBenchmarkSubject}.
+   */
   public LoginOpRequestPayloadBenchmarkSubject() throws Exception {
     LoginOpRequestPayload subject = LoginOpRequestPayload
         .builder()

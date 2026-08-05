@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.enumeration.OpaqueDataType;
 import org.purplebean.kmip.model.core.structure.OpaqueObject;
 import org.purplebean.kmip.model.core.type.OpaqueDataValue;
 
+/**
+ * Benchmark subject for {@link OpaqueObject}.
+ */
 public class OpaqueObjectBenchmarkSubject extends KmipBenchmarkSubject<OpaqueObject> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link OpaqueObjectBenchmarkSubject}.
+   */
   public OpaqueObjectBenchmarkSubject() throws Exception {
     OpaqueObject subject = OpaqueObject
         .builder()

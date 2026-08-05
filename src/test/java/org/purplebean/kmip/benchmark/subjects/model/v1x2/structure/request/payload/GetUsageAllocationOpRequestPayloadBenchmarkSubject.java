@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.core.type.UsageLimitsCount;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetUsageAllocationOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link GetUsageAllocationOpRequestPayload}.
+ */
 public class GetUsageAllocationOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<GetUsageAllocationOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link GetUsageAllocationOpRequestPayloadBenchmarkSubject}.
+   */
   public GetUsageAllocationOpRequestPayloadBenchmarkSubject() throws Exception {
     GetUsageAllocationOpRequestPayload subject = GetUsageAllocationOpRequestPayload
         .builder()

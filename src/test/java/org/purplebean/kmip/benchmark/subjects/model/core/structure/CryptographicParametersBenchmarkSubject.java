@@ -16,9 +16,15 @@ import org.purplebean.kmip.model.core.type.IvLength;
 import org.purplebean.kmip.model.core.type.RandomIv;
 import org.purplebean.kmip.model.core.type.TagLength;
 
+/**
+ * Benchmark subject for {@link CryptographicParameters}.
+ */
 public class CryptographicParametersBenchmarkSubject
     extends KmipBenchmarkSubject<CryptographicParameters> {
 
+  /**
+   * Constructs a new {@link CryptographicParametersBenchmarkSubject}.
+   */
   public CryptographicParametersBenchmarkSubject() throws Exception {
     CryptographicParameters cryptographicParameters = CryptographicParameters
         .builder()

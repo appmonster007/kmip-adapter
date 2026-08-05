@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.enumeration.ProfileName;
 import org.purplebean.kmip.model.v2x1.structure.ProfileInformation;
 
+/**
+ * Benchmark subject for {@link ProfileInformation}.
+ */
 public class ProfileInformationBenchmarkSubject extends KmipBenchmarkSubject<ProfileInformation> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ProfileInformationBenchmarkSubject}.
+   */
   public ProfileInformationBenchmarkSubject() throws Exception {
     ProfileInformation subject =
         ProfileInformation.of(ProfileName.Standard.COMPLETE_SERVER_BASIC.inst());

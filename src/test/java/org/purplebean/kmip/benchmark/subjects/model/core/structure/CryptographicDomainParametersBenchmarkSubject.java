@@ -5,9 +5,15 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.CryptographicDomainParameters;
 import org.purplebean.kmip.model.core.type.Qlength;
 
+/**
+ * Benchmark subject for {@link CryptographicDomainParameters}.
+ */
 public class CryptographicDomainParametersBenchmarkSubject
     extends KmipBenchmarkSubject<CryptographicDomainParameters> {
 
+  /**
+   * Constructs a new {@link CryptographicDomainParametersBenchmarkSubject}.
+   */
   public CryptographicDomainParametersBenchmarkSubject() throws Exception {
     CryptographicDomainParameters cryptographicDomainParameters = CryptographicDomainParameters
         .builder()

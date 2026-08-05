@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.GetUsageAllocationOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link GetUsageAllocationOpResponsePayload}.
+ */
 public class GetUsageAllocationOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<GetUsageAllocationOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link GetUsageAllocationOpResponsePayloadBenchmarkSubject}.
+   */
   public GetUsageAllocationOpResponsePayloadBenchmarkSubject() throws Exception {
     GetUsageAllocationOpResponsePayload subject = GetUsageAllocationOpResponsePayload
         .builder()

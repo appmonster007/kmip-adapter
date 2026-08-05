@@ -11,11 +11,17 @@ import org.purplebean.kmip.model.core.structure.KeyValueStructure;
 import org.purplebean.kmip.model.core.type.AttributeValue;
 import org.purplebean.kmip.model.core.type.KeyMaterialByteString;
 
+/**
+ * Benchmark subject for {@link KeyValueStructure}.
+ */
 public class KeyValueStructureBenchmarkSubject extends KmipBenchmarkSubject<KeyValueStructure> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link KeyValueStructureBenchmarkSubject}.
+   */
   public KeyValueStructureBenchmarkSubject() throws Exception {
     KeyMaterial keyMaterial = KeyMaterialByteString.of(new byte[] {0x01, 0x02, 0x03});
     KmipAttribute attribute =

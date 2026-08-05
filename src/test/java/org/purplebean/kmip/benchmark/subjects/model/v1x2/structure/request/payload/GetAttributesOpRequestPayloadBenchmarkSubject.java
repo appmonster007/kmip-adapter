@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.type.AttributeName;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.GetAttributesOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link GetAttributesOpRequestPayload}.
+ */
 public class GetAttributesOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<GetAttributesOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link GetAttributesOpRequestPayloadBenchmarkSubject}.
+   */
   public GetAttributesOpRequestPayloadBenchmarkSubject() throws Exception {
     GetAttributesOpRequestPayload subject = GetAttributesOpRequestPayload
         .builder()

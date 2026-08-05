@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.response.payload.LogoutOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link LogoutOpResponsePayload}.
+ */
 public class LogoutOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<LogoutOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion; // TODO: Adjust if needed
 
+  /**
+   * Constructs a new {@link LogoutOpResponsePayloadBenchmarkSubject}.
+   */
   public LogoutOpResponsePayloadBenchmarkSubject() throws Exception {
     LogoutOpResponsePayload subject = LogoutOpResponsePayload
         .builder()

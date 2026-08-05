@@ -13,12 +13,18 @@ import org.purplebean.kmip.model.core.structure.DerivationParameters;
 import org.purplebean.kmip.model.core.type.DerivationData;
 import org.purplebean.kmip.model.core.type.InitializationVector;
 
+/**
+ * Benchmark subject for {@link DerivationParameters}.
+ */
 public class DerivationParametersBenchmarkSubject
     extends KmipBenchmarkSubject<DerivationParameters> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link DerivationParametersBenchmarkSubject}.
+   */
   public DerivationParametersBenchmarkSubject() throws Exception {
     DerivationParameters subject = DerivationParameters
         .builder()

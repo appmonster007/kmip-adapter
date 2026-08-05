@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.structure.request.payload.EncryptOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link EncryptOpRequestPayload}.
+ */
 public class EncryptOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<EncryptOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link EncryptOpRequestPayloadBenchmarkSubject}.
+   */
   public EncryptOpRequestPayloadBenchmarkSubject() throws Exception {
     EncryptOpRequestPayload subject = EncryptOpRequestPayload
         .builder()

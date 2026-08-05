@@ -6,12 +6,18 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.ObtainLeaseOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link ObtainLeaseOpRequestPayload}.
+ */
 public class ObtainLeaseOpRequestPayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ObtainLeaseOpRequestPayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ObtainLeaseOpRequestPayloadBenchmarkSubject}.
+   */
   public ObtainLeaseOpRequestPayloadBenchmarkSubject() throws Exception {
     ObtainLeaseOpRequestPayload subject = ObtainLeaseOpRequestPayload
         .builder()

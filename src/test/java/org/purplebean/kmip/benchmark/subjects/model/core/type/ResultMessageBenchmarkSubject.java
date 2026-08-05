@@ -5,11 +5,17 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ResultMessage;
 
+/**
+ * Benchmark subject for {@link ResultMessage}.
+ */
 public class ResultMessageBenchmarkSubject extends KmipBenchmarkSubject<ResultMessage> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ResultMessageBenchmarkSubject}.
+   */
   public ResultMessageBenchmarkSubject() throws Exception {
     ResultMessage resultMessage = ResultMessage
         .builder()

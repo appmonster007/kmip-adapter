@@ -8,11 +8,17 @@ import org.purplebean.kmip.model.core.enumeration.Operation;
 import org.purplebean.kmip.model.core.enumeration.ResultStatus;
 import org.purplebean.kmip.model.v1x2.structure.response.ResponseBatchItem;
 
+/**
+ * Benchmark subject for {@link ResponseBatchItem}.
+ */
 public class ResponseBatchItemBenchmarkSubject extends KmipBenchmarkSubject<ResponseBatchItem> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ResponseBatchItemBenchmarkSubject}.
+   */
   public ResponseBatchItemBenchmarkSubject() throws Exception {
     KmipContext.setSpec(spec);
     ResponseBatchItem subject = ResponseBatchItem

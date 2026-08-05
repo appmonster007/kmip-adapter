@@ -5,12 +5,18 @@ import org.purplebean.kmip.api.KmipSpec;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.v2x1.type.ValidationAuthorityUri;
 
+/**
+ * Benchmark subject for {@link ValidationAuthorityUri}.
+ */
 public class ValidationAuthorityUriBenchmarkSubject
     extends KmipBenchmarkSubject<ValidationAuthorityUri> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link ValidationAuthorityUriBenchmarkSubject}.
+   */
   public ValidationAuthorityUriBenchmarkSubject() throws Exception {
     ValidationAuthorityUri subject = ValidationAuthorityUri.of("default-string");
     initialize(subject, ValidationAuthorityUri.class);

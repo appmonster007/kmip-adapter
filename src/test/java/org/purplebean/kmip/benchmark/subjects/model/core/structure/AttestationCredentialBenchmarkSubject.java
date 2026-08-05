@@ -9,12 +9,18 @@ import org.purplebean.kmip.model.core.structure.Nonce;
 import org.purplebean.kmip.model.core.type.NonceId;
 import org.purplebean.kmip.model.core.type.NonceValue;
 
+/**
+ * Benchmark subject for {@link AttestationCredential}.
+ */
 public class AttestationCredentialBenchmarkSubject
     extends KmipBenchmarkSubject<AttestationCredential> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link AttestationCredentialBenchmarkSubject}.
+   */
   public AttestationCredentialBenchmarkSubject() throws Exception {
     AttestationCredential subject = AttestationCredential
         .builder()

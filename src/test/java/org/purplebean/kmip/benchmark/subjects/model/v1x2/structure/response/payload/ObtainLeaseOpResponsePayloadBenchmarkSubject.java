@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.type.LeaseTime;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.ObtainLeaseOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link ObtainLeaseOpResponsePayload}.
+ */
 public class ObtainLeaseOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<ObtainLeaseOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link ObtainLeaseOpResponsePayloadBenchmarkSubject}.
+   */
   public ObtainLeaseOpResponsePayloadBenchmarkSubject() throws Exception {
     ObtainLeaseOpResponsePayload subject = ObtainLeaseOpResponsePayload
         .builder()

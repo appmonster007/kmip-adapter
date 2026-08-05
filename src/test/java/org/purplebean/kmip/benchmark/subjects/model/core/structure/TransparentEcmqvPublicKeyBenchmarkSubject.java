@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.core.enumeration.RecommendedCurve;
 import org.purplebean.kmip.model.core.structure.TransparentEcmqvPublicKey;
 import org.purplebean.kmip.model.core.type.QString;
 
+/**
+ * Benchmark subject for {@link TransparentEcmqvPublicKey}.
+ */
 public class TransparentEcmqvPublicKeyBenchmarkSubject
     extends KmipBenchmarkSubject<TransparentEcmqvPublicKey> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link TransparentEcmqvPublicKeyBenchmarkSubject}.
+   */
   public TransparentEcmqvPublicKeyBenchmarkSubject() throws Exception {
     TransparentEcmqvPublicKey transparentEcmqvPublicKey = TransparentEcmqvPublicKey.of(
         RecommendedCurve.Standard.P_192.inst(),

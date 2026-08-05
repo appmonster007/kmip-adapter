@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.Password;
 import org.purplebean.kmip.model.v3x0.structure.PasswordCredential;
 
+/**
+ * Benchmark subject for {@link PasswordCredential}.
+ */
 public class PasswordCredentialBenchmarkSubject extends KmipBenchmarkSubject<PasswordCredential> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link PasswordCredentialBenchmarkSubject}.
+   */
   public PasswordCredentialBenchmarkSubject() throws Exception {
     PasswordCredential subject = PasswordCredential
         .builder()

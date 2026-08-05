@@ -10,11 +10,17 @@ import org.purplebean.kmip.model.core.structure.TemplateAttribute;
 import org.purplebean.kmip.model.v1x2.structure.request.RequestBatchItem;
 import org.purplebean.kmip.model.v1x2.structure.request.payload.CreateOpRequestPayload;
 
+/**
+ * Benchmark subject for {@link RequestBatchItem}.
+ */
 public class RequestBatchItemBenchmarkSubject extends KmipBenchmarkSubject<RequestBatchItem> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link RequestBatchItemBenchmarkSubject}.
+   */
   public RequestBatchItemBenchmarkSubject() throws Exception {
     RequestBatchItem subject = RequestBatchItem
         .builder()

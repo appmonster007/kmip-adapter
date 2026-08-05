@@ -10,12 +10,18 @@ import org.purplebean.kmip.model.core.structure.SymmetricKey;
 import org.purplebean.kmip.model.core.type.UniqueIdentifier;
 import org.purplebean.kmip.model.v1x2.structure.response.payload.GetOpResponsePayload;
 
+/**
+ * Benchmark subject for {@link GetOpResponsePayload}.
+ */
 public class GetOpResponsePayloadBenchmarkSubject
     extends KmipBenchmarkSubject<GetOpResponsePayload> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V1_2;
 
+  /**
+   * Constructs a new {@link GetOpResponsePayloadBenchmarkSubject}.
+   */
   public GetOpResponsePayloadBenchmarkSubject() throws Exception {
     GetOpResponsePayload subject = GetOpResponsePayload
         .builder()

@@ -5,8 +5,14 @@ import org.purplebean.kmip.model.core.enumeration.NameType;
 import org.purplebean.kmip.model.core.structure.Name;
 import org.purplebean.kmip.model.core.type.NameValue;
 
+/**
+ * Benchmark subject for {@link Name}.
+ */
 public class NameBenchmarkSubject extends KmipBenchmarkSubject<Name> {
 
+  /**
+   * Constructs a new {@link NameBenchmarkSubject}.
+   */
   public NameBenchmarkSubject() throws Exception {
     Name name = Name
         .builder()

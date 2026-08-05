@@ -5,8 +5,14 @@ import java.time.ZoneOffset;
 import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.type.ActivationDate;
 
+/**
+ * Benchmark subject for {@link ActivationDate}.
+ */
 public class ActivationDateBenchmarkSubject extends KmipBenchmarkSubject<ActivationDate> {
 
+  /**
+   * Constructs a new {@link ActivationDateBenchmarkSubject}.
+   */
   public ActivationDateBenchmarkSubject() throws Exception {
     ActivationDate activationDate = ActivationDate
         .builder()

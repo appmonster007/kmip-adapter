@@ -6,11 +6,17 @@ import org.purplebean.kmip.benchmark.api.KmipBenchmarkSubject;
 import org.purplebean.kmip.model.core.enumeration.RngAlgorithm;
 import org.purplebean.kmip.model.v2x1.structure.RngParameters;
 
+/**
+ * Benchmark subject for {@link RngParameters}.
+ */
 public class RngParametersBenchmarkSubject extends KmipBenchmarkSubject<RngParameters> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.UnknownVersion;
 
+  /**
+   * Constructs a new {@link RngParametersBenchmarkSubject}.
+   */
   public RngParametersBenchmarkSubject() throws Exception {
     RngParameters subject = RngParameters.of(RngAlgorithm.Standard.UNSPECIFIED.inst());
     initialize(subject, RngParameters.class);

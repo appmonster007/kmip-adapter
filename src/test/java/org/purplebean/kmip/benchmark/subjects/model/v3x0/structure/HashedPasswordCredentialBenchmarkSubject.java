@@ -7,12 +7,18 @@ import org.purplebean.kmip.model.v3x0.structure.HashedPasswordCredential;
 import org.purplebean.kmip.model.v3x0.type.HashedPasswordUsername;
 import org.purplebean.kmip.model.v3x0.type.HashedUsernamePassword;
 
+/**
+ * Benchmark subject for {@link HashedPasswordCredential}.
+ */
 public class HashedPasswordCredentialBenchmarkSubject
     extends KmipBenchmarkSubject<HashedPasswordCredential> {
 
   @Getter
   private final KmipSpec spec = KmipSpec.V3_0;
 
+  /**
+   * Constructs a new {@link HashedPasswordCredentialBenchmarkSubject}.
+   */
   public HashedPasswordCredentialBenchmarkSubject() throws Exception {
     HashedPasswordCredential subject = HashedPasswordCredential
         .builder()
