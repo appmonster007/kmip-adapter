@@ -11,6 +11,7 @@ JUnit 5 + AssertJ. `mvn test` runs the whole suite. `-Pwith-integration` clears 
 | `codec/{json,xml,ttlv}/model/<v>/<kind>/<Name>{Json,Xml,Ttlv}Test` | Per-format round-trip tests |
 | `test/suite/` | Reusable base suites (below) |
 | `benchmark/` | JMH benchmarks, `subjects/` (one subject per type), `util/BenchmarkSubjects`, report generator |
+| `spi/` | `SpiRegistrationAuditTest`: every concrete type and codec class is listed in its `META-INF/services` file and every entry resolves |
 | `verification/` | `KmipV12/V21/V30VerificationTest` run the official KMIP test-case vectors |
 | `documentation/` | `DocumentationExamplesTest` (executes doc samples), `AllFormatsSerializationTest` (writes `build/reports/kmip/serialization*.md`) |
 
@@ -25,6 +26,13 @@ JUnit 5 + AssertJ. `mvn test` runs the whole suite. `-Pwith-integration` clears 
 A per-format test supplies `type()`, `createDefault()`, optional `createVariant()`, the mapper and
 (de)serialize methods; the generator scaffolds all of that. Your job is real values in
 `createDefault()`.
+
+## SPI audit
+
+`SpiRegistrationAuditTest` fails when a concrete `KmipDataType` or codec class is missing from its
+SPI file, or when a line names a class that does not exist or does not implement the service. It
+reports all gaps in one message. After a hand edit or merge, run
+`mvn test -Dtest=SpiRegistrationAuditTest`.
 
 ## Commands
 
